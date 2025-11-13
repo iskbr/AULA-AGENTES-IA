@@ -5,18 +5,14 @@ from crewai import Agent, Task, Crew, Process, LLM
 # ---------------------------
 # UI
 # ---------------------------
-st.header("📚 Agentes de Estudo")
-st.write("Informe o tema e gere material didático automaticamente:")
+st.header("📚 Agente Auxiliar de Treino")
+st.write("Informe os músculos a serem treinados:")
 
-tema = st.text_input("Tema de estudo", placeholder="Ex.: Algoritmos de Busca, Fotossíntese, Juros Compostos")
-nivel = st.text_input("Público/nível (opcional)", placeholder="Ex.: iniciante, ensino médio, graduação, profissional")
-objetivo = st.text_area("Objetivo (opcional)", placeholder="Ex.: entender conceitos básicos e aplicar em exercícios simples")
+tema_treino = st.text_input("Músculo", placeholder="Ex.: Pernas, Peito, Costas")
+objetivo = st.text_area("Objetivo (opcional)", placeholder="Ex.: Hipertrofia, Força, Resistência")
 
-# NOVO: toggle para gabarito
-mostrar_gabarito = st.toggle("Gerar e mostrar gabarito (respostas + justificativas)", value=True)
-
-executar = st.button("Gerar material")
-api_key = 'sua_chave_api_aqui'
+executar = st.button("Gerar treino")
+api_key = 'SUA_CHAVE_API_AQUI'
 
 if executar:
     if not api_key or not tema:
@@ -35,10 +31,10 @@ if executar:
     # ---------------------------
     # Agentes
     # ---------------------------
-    agente_resumo = Agent(
+    agente_tema_treino = Agent(
         role="Redator(a) de Resumo Didático",
         goal=(
-            "Escrever um RESUMO claro e didático sobre {tema} para o público {nivel}, "
+            "Escrever um RESUMO claro e didático sobre {tema_tema} para o público {nivel}, "
             "alinhado ao objetivo {objetivo}. "
             "A linguagem deve ser direta, com contexto prático e sem jargões desnecessários."
         ),
